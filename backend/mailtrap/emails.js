@@ -55,7 +55,7 @@ export const sendPasswordResetEmail = async (email, resetToken) => {
             email: "cihanbas.api@gmail.com", // When we have a real domain and have a acount with mailtrap, we can replace this with the actual recipient's email address
         }
     ];
-    const resetURL = `${process.env.CLIENT_URL}/reset-password?${resetToken}`; // Replace with your actual frontend URL for password reset
+    const resetURL = `${process.env.CLIENT_URL}/reset-password/${resetToken}`; // Replace with your actual frontend URL for password reset
     const htmlContent = PASSWORD_RESET_REQUEST_TEMPLATE
                             .replace("{userEmail}", email)
                             .replace("{resetURL}", resetURL);

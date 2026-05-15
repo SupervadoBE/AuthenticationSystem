@@ -118,9 +118,15 @@ export const forgotPassword = async (req, res) => {
         const passwordResetToken = generatePasswordResetToken(); // Implement this function to generate a secure password reset token
         const passwordResetTokenExpiresAt = generateTokenExpiresAt(); // Implement this function to set an expiration time for the token
 
-        user.resetPasswordToken = passwordResetToken;
-        user.resetPasswordExpiresAt = passwordResetTokenExpiresAt;
-        await user.save();
+        // bu kısım yerine Atomic Update Yapacağız
+        // user.resetPasswordToken = passwordResetToken;
+        // user.resetPasswordExpiresAt = passwordResetTokenExpiresAt;
+        // await user.save();
+
+        await User.findByIdAndUpdate(user._id, {
+            resetPasswordToken: passwordResetToken,
+            resetPasswordExpiresAt: passwordResetTokenExpiresAt,
+        })
 
         // Implement sendPasswordResetEmail function to send an email to the user with the password reset token
         await sendPasswordResetEmail(user.email, passwordResetToken);

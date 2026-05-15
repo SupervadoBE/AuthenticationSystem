@@ -8,11 +8,7 @@ export const generateVerificationToken = () => {
 };
 
 export const generateTokenExpiresAt = () => {
-    const expiresAt = new Date();
-    expiresAt.setHours(expiresAt.getHours() + 1); // Set token to expire in 1 hour
-    return expiresAt;
-
-    // return Date.now() + 3600000; // Token expires in 1 hour
+    return new Date(Date.now() + 4 * 60 * 60 * 1000)
 };
 
 export const generateTokenAndSetCookie = (res, userId) => {
